@@ -1,19 +1,18 @@
 tf = 10;
-N = 100;
+N = 10;
 t = linspace(0,tf,N);
 dt = t(2)-t(1);
 
 % x = [x,y,dxdt,dydt]
 
 % initial state
-x00 = [0;0;5;0];
+x00 = [0;0;2;0];
 
 % response if plane stays passive
-x0 = getPlaneResponse(x00,zeros(1,N),tf,dt);
+x0 = trapruleplane(x00,zeros(1,N),tf,dt);
 
 % desired final state
 xf = x0(:,end);
-xf(1) = xf(1)+0; % just 5 further to the right
 
 % initial guess for newton is known solution
 xinit = [reshape(x0,[],1);zeros(N,1)];
@@ -51,7 +50,6 @@ end
 
 xtraj = traj(1:4:N*4);
 ytraj = traj(2:4:N*4);
-
 u = traj(end-N+1:end);
 
 plot(xtraj, ytraj, '.:');

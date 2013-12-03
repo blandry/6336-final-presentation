@@ -1,4 +1,4 @@
-function [x0,convergence,nf] = newtonNd(fhand,x0)
+function [x0,convergence] = newtonNd(fhand,x0)
 % function newtonNd(fhand,x0,itpause)
 % 
 % INPUTS:
@@ -19,9 +19,7 @@ end
 
 tolf=1e-10;
 tolx=1e-8;
-maxIters=15;       % max # of iterations
-
-x00=x0;             % initial guess
+maxIters=500;       % max # of iterations
 
 % Newton loop
 for iter=1:maxIters
@@ -40,7 +38,8 @@ end
 
 convergence = 1;
 if iter==maxIters, % check for non-convergence
-    plot([1:500],x(:,iter))
+    plot(x(1:4:40,iter),x(2:4:40,iter),x(1:4:40,iter-100),x(2:4:40,iter-100),x(1:4:40,iter-200),x(2:4:40,iter-200),x(1:4:40,iter-300),x(2:4:40,iter-300));
+    legend('4','3','2','1');
     fprintf('Non-Convergence after %d iterations!!!\n',iter); 
     convergence = 0;
 end
