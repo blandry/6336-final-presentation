@@ -39,6 +39,8 @@ for i=1:maxIters
     
 end
 
+x = traj;
+
 xtrajs = trajs(1:4:end,1:i);
 ytrajs = trajs(2:4:end,1:i);
 

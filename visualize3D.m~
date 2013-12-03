@@ -27,8 +27,8 @@ ytrajn = (ytraj-alt0s)/(altfs-alt0s);
 alt = ytrajn*(altf-alt0)+alt0;
 
 %eulang = convang(tdata(:,5:7),'deg','rad');
-pitch = 90*ones(N,1);
-eulang = [zeros(N,1),pitch,zeros(N,1)];
+pitch = pi*ones(N,1);
+eulang = [zeros(N,2),];
 
 t0 = tdata(1,1);
 tf = tdata(end,1);
@@ -58,8 +58,8 @@ h.OffsetAzimuth = 0;
 
 h.TimeScaling = 5;
 
-%GenerateRunScript(h);
-%system('. runfg.bat &');
+GenerateRunScript(h);
+system('. runfg.bat &');
 
 play(h);
 
