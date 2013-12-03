@@ -38,8 +38,6 @@ end
 
 convergence = 1;
 if iter==maxIters, % check for non-convergence
-    plot(x(1:4:40,iter),x(2:4:40,iter),x(1:4:40,iter-100),x(2:4:40,iter-100),x(1:4:40,iter-200),x(2:4:40,iter-200),x(1:4:40,iter-300),x(2:4:40,iter-300));
-    legend('4','3','2','1');
     fprintf('Non-Convergence after %d iterations!!!\n',iter); 
     convergence = 0;
 end
