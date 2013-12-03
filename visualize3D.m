@@ -4,6 +4,14 @@ function [ ] = visualize3D( x, t )
 
 tdata = dlmread('/usr/local/MATLAB/R2013b/toolbox/aero/astdemos/asthl20log.csv',',',1,0);
 N = size(tdata,1);
+pitch = zeros(N,1);
+for i=1:N-1
+    u = [x(1,i);x(2,i)];
+    v = [x(1,i+1);x(2,i+1)];
+    d = v-u;
+    pitch(i) = atan(d(2)/d(1));;
+end
+pitch(N) = pitch(N-1);
 
 xtraj = x(1,1:N)';
 ytraj = x(2,1:N)';
@@ -27,7 +35,6 @@ ytrajn = (ytraj-alt0s)/(altfs-alt0s);
 alt = ytrajn*(altf-alt0)+alt0;
 
 %eulang = convang(tdata(:,5:7),'deg','rad');
-pitch = 90*ones(N,1);
 eulang = [zeros(N,1),pitch,zeros(N,1)];
 
 t0 = tdata(1,1);
@@ -58,8 +65,8 @@ h.OffsetAzimuth = 0;
 
 h.TimeScaling = 5;
 
-%GenerateRunScript(h);
-%system('. runfg.bat &');
+GenerateRunScript(h);
+system('. runfg.bat &');
 
 play(h);
 
